@@ -9,8 +9,7 @@ fi
 set -exo pipefail
 
 cp /vagrant/gerritconfigs/*.config ~
-java -jar /vagrant/gerrit-2.12.2.war
-java -jar /vagrant/gerrit-2.12.2.war init --batch --site-path /opt/gerrit
-java -jar bin/gerrit.war reindex -d /opt/gerrit
+java -jar /vagrant/gerrit-2.11.2.war init --batch --site-path /opt/gerrit
+java -jar /opt/gerrit/bin/gerrit.war reindex -d /opt/gerrit
 
 

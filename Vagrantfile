@@ -17,7 +17,7 @@ if not plugins_to_install.empty?
   end
 end
 
-gerrit_war = 'gerrit-2.12.2.war'
+gerrit_war = 'gerrit-2.11.2.war'
 
 Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
   config.vm.box = "vStone/centos-6.x-puppet.3.x"
@@ -51,6 +51,10 @@ Vagrant.configure(VAGRANTFILE_API_VERSION) do |config|
     puppet.manifest_file  = "site.pp"
   end
 
+  config.vm.provision :shell, :privileged => true,
+    :path => 'install-gerrit-step1-root.sh'
+  config.vm.provision :shell, :privileged => false,
+    :path => 'ssh-keys.sh'
   #config.vm.provision :shell, :inline => "rm /vagrant/#{gerrit_war}"
   config.vm.network :forwarded_port, guest: 8080, host: 8091 # gerrit web
   config.vm.network :forwarded_port, guest: 8081, host: 8092 # jenkins
